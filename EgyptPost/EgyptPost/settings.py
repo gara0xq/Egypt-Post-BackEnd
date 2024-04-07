@@ -11,22 +11,22 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-import environ
 
 env = environ.Env()
 
-environ.Env.read_env()
+env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-54rcyj23ittkdnc_k^hhibu@)+g5r0tl7svu87f=u%4ymk4)m$'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -106,8 +106,7 @@ DATABASES = {
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.parse('postgres://fl0user:EARdkfSg1I3X@ep-delicate-sunset-a23bbout.eu-central-1.aws.neon.fl0.io:5432/EgyptPostDatabase?sslmode=require')
-
+    'default': dj_database_url.parse(env("DATABASES_URL"))
 }
 
 
@@ -152,11 +151,6 @@ STATICFILES_DIR = [BASE_DIR/ 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-
-
-
-
 
 
 
