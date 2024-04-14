@@ -1,3 +1,4 @@
 .env
 insert.py
 .xlsx
+venv/

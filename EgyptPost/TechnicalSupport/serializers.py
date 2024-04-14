@@ -13,7 +13,6 @@ class FirstDevicesSerializer(serializers.ModelSerializer):
         currentIp = validated_data.pop('ip', None)
 
         startsSerials = DevicesModuleModel.objects.values_list('serial', flat= True)
-        
         offices_obj = OfficesModel.objects.filter(office=currentoffice)
         sector_obj = ""
 
@@ -21,9 +20,6 @@ class FirstDevicesSerializer(serializers.ModelSerializer):
             currentserial = currentserial.lower()
             serial = serial.lower()
             if not currentserial.startswith(serial):
-                print(currentserial.startswith(serial))
-                print(serial)
-                print(currentserial)
                 raise serializers.ValidationError("Serial Incorrect")
             else:
                 devices_module_obj = DevicesModuleModel.objects.filter(serial=serial)
@@ -148,3 +144,4 @@ class device():
         validated_data['sectorCode'] = sectorCode
         validated_data['numOfWindows'] = numOfWindows
         validated_data['ip'] = ip
+
